@@ -55,7 +55,10 @@ builder.Services.AddSwaggerGen(opt =>
 var app = builder.Build();
 
 app.UseSwagger();
-//app.UseSwaggerUI(c =>)
+app.UseSwaggerUI(conf =>
+{
+    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+});
 
 // Configure the HTTP request pipeline.
 
