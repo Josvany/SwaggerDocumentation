@@ -58,6 +58,7 @@ app.UseSwagger();
 app.UseSwaggerUI(conf =>
 {
     conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+    conf.RoutePrefix = string.Empty;
 });
 
 // Configure the HTTP request pipeline.
