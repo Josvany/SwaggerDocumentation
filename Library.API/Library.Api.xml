@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Library.API</name>
+    </assembly>
+    <members>
+        <member name="M:Library.API.Controllers.AuthorsController.GetAuthor(System.Guid)">
+            <summary>
+            obtener actor por id
+            </summary>
+            <param name="authorId">Id del autor</param>
+            <returns>retorna id, firsname, lastname </returns>
+        </member>
+    </members>
+</doc>

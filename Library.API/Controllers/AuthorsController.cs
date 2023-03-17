@@ -30,6 +30,11 @@ namespace Library.API.Controllers
             return Ok(_mapper.Map<IEnumerable<Author>>(authorsFromRepo));
         }
 
+        /// <summary>
+        /// obtener actor por id
+        /// </summary>
+        /// <param name="authorId">Id del autor</param>
+        /// <returns>retorna id, firsname, lastname </returns>
         [HttpGet("{authorId}")]
         public async Task<ActionResult<Author>> GetAuthor(
             Guid authorId)

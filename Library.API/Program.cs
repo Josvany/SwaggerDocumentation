@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,11 @@ builder.Services.AddSwaggerGen(opt =>
         Title = "Library Api",
         Version = "v1"
     });
+
+    var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlCommentFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, xmlCommentFile);
+
+    opt.IncludeXmlComments(xmlCommentFilePath);
 });
 
 var app = builder.Build();
