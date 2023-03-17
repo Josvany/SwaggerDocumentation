@@ -43,7 +43,19 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    {
+        Title = "Library Api",
+        Version = "v1"
+    });
+});
+
 var app = builder.Build();
+
+app.UseSwagger();
+//app.UseSwaggerUI(c =>)
 
 // Configure the HTTP request pipeline.
 
