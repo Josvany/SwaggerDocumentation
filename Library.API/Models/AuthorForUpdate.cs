@@ -8,13 +8,13 @@ namespace Library.API.Models
     public class AuthorForUpdate
     {
         /// <summary>
-        /// nombre actor
+        /// Primer Nombre del autor
         /// </summary>
         [Required(ErrorMessage = "El nombre es requerido")]
         [MaxLength(100)]
         public string? FirstName { get; set; }
         /// <summary>
-        /// apellido actor
+        /// Apellido del autor
         /// </summary>
         [Required(ErrorMessage = "El apellido es requerido")]
         [MaxLength(100)]

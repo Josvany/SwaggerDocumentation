@@ -11,5 +11,40 @@
             <param name="authorId">Id del autor</param>
             <returns>retorna id, firsname, lastname </returns>
         </member>
+        <member name="T:Library.API.Models.Author">
+            <summary>
+            author
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.Id">
+            <summary>
+            Id del author
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.FirstName">
+            <summary>
+            Nombre
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.LastName">
+            <summary>
+            apellido
+            </summary>
+        </member>
+        <member name="T:Library.API.Models.AuthorForUpdate">
+            <summary>
+            actor update
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.AuthorForUpdate.FirstName">
+            <summary>
+            Primer Nombre del autor
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.AuthorForUpdate.LastName">
+            <summary>
+            Apellido del autor
+            </summary>
+        </member>
     </members>
 </doc>
