@@ -2,6 +2,7 @@
 using Library.API.Models;
 using Library.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace Library.API.Controllers
 {
@@ -21,6 +22,9 @@ namespace Library.API.Controllers
         }
 
         [HttpGet()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks(
             Guid authorId)
         {
@@ -60,6 +64,9 @@ namespace Library.API.Controllers
         }
 
         [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<Book>> CreateBook(
             Guid authorId,
             BookForCreation bookForCreation)
