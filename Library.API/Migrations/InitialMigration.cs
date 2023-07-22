@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -17,10 +16,7 @@ namespace Library.API.Migrations
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Authors", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Authors", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "Books",

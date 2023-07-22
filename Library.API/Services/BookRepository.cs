@@ -1,12 +1,12 @@
 ﻿using Library.API.Contexts;
 using Library.API.Entities;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.API.Services
 {
     public class BookRepository : IBookRepository
-    {       
-        private readonly LibraryContext _context; 
+    {
+        private readonly LibraryContext _context;
 
         public BookRepository(LibraryContext context)
         {
@@ -17,7 +17,7 @@ namespace Library.API.Services
         {
             if (authorId == Guid.Empty)
             {
-                throw new ArgumentException("Argument can not be null or empty.", 
+                throw new ArgumentException("Argument can not be null or empty.",
                     nameof(authorId));
             }
 
@@ -60,7 +60,7 @@ namespace Library.API.Services
         public async Task<bool> SaveChangesAsync()
         {
             // return true if 1 or more entities were changed
-            return (await _context.SaveChangesAsync() > 0);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

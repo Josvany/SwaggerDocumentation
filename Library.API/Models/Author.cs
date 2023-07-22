@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Library.API.Models
+﻿namespace Library.API.Models
 {
     /// <summary>
     /// author
@@ -11,10 +9,12 @@ namespace Library.API.Models
         /// Id del author
         /// </summary>
         public Guid Id { get; set; }
+
         /// <summary>
         /// Nombre
         /// </summary>
         public string? FirstName { get; set; }
+
         /// <summary>
         /// apellido
         /// </summary>

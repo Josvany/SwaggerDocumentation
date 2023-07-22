@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Library.API.Models
+﻿namespace Library.API.Models
 {
     public class BookWithConcatenatedAuthorName
     {

@@ -27,12 +27,12 @@ namespace Library.API.Services
         {
             if (authorId == Guid.Empty)
             {
-                throw new ArgumentException("Argument can not be null or empty.", 
+                throw new ArgumentException("Argument can not be null or empty.",
                     nameof(authorId));
             }
 
             return await _context.Authors
-                .FirstOrDefaultAsync(a => a.Id == authorId); 
+                .FirstOrDefaultAsync(a => a.Id == authorId);
         }
 
         public void UpdateAuthor(Author author)
@@ -43,7 +43,7 @@ namespace Library.API.Services
         public async Task<bool> SaveChangesAsync()
         {
             // return true if 1 or more entities were changed
-            return (await _context.SaveChangesAsync() > 0);
-        } 
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

@@ -9,17 +9,17 @@ namespace Library.API
         {
             if (list == null)
             {
-                throw new ArgumentNullException("list");
+                throw new ArgumentNullException(nameof(list));
             }
 
             if (items == null)
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             }
 
-            if (list is List<T>)
+            if (list is List<T> lists)
             {
-                ((List<T>)list).AddRange(items);
+                lists.AddRange(items);
             }
             else
             {

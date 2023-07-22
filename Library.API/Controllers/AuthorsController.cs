@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Library.API.Models;
-using Library.API.Services; 
+using Library.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +17,9 @@ namespace Library.API.Controllers
             IAuthorRepository authorsRepository,
             IMapper mapper)
         {
-            _authorsRepository = authorsRepository 
+            _authorsRepository = authorsRepository
                 ?? throw new ArgumentNullException(nameof(authorsRepository));
-            _mapper = mapper 
+            _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
         }
 

@@ -7,7 +7,7 @@ namespace Library.API.Attributes
     [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
     public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstraint
     {
-        private readonly MediaTypeCollection _mediaTypes = new ();
+        private readonly MediaTypeCollection _mediaTypes = new();
         private readonly string _requestHeaderToMatch;
 
         public RequestHeaderMatchesMediaTypeAttribute(string requestHeaderToMatch,
@@ -26,7 +26,7 @@ namespace Library.API.Attributes
             }
             else
             {
-                throw new ArgumentException("Argument can not be null or empty.", 
+                throw new ArgumentException("Argument can not be null or empty.",
                     nameof(mediaType));
             }
 
@@ -39,11 +39,10 @@ namespace Library.API.Attributes
                 }
                 else
                 {
-                    throw new ArgumentException("Argument can not be null or empty.", 
+                    throw new ArgumentException("Argument can not be null or empty.",
                         nameof(otherMediaTypes));
                 }
             }
-
         }
 
         public int Order { get; }

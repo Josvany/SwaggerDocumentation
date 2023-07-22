@@ -9,7 +9,7 @@ namespace Library.API.Profiles
             CreateMap<Entities.Book, Models.BookWithConcatenatedAuthorName>()
             .ForMember(dest => dest.Author, opt => opt.MapFrom(src =>
             src.Author == null ? "" : $"{src.Author.FirstName} {src.Author.LastName}")
-             ); 
+             );
 
             CreateMap<Entities.Book, Models.Book>()
             .ForMember(dest => dest.AuthorFirstName, opt => opt.MapFrom(src =>

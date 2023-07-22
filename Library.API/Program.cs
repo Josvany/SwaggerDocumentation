@@ -9,10 +9,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers(configure =>
-{
-    configure.ReturnHttpNotAcceptable = true;
-}).AddNewtonsoftJson(setupAction =>
+builder.Services.AddControllers(configure => configure.ReturnHttpNotAcceptable = true).AddNewtonsoftJson(setupAction =>
 {
     setupAction.SerializerSettings.ContractResolver =
        new CamelCasePropertyNamesContractResolver();

@@ -13,6 +13,7 @@ namespace Library.API.Models
         [Required(ErrorMessage = "El nombre es requerido")]
         [MaxLength(100)]
         public string? FirstName { get; set; }
+
         /// <summary>
         /// Apellido del autor
         /// </summary>

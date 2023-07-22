@@ -18,11 +18,11 @@ namespace Library.API.Controllers
             IAuthorRepository authorRepository,
             IMapper mapper)
         {
-            _bookRepository = bookRepository 
+            _bookRepository = bookRepository
                 ?? throw new ArgumentNullException(nameof(bookRepository));
-            _authorRepository = authorRepository 
+            _authorRepository = authorRepository
                 ?? throw new ArgumentNullException(nameof(authorRepository));
-            _mapper = mapper 
+            _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -57,7 +57,6 @@ namespace Library.API.Controllers
 
             return Ok(_mapper.Map<Book>(bookFromRepo));
         }
-
 
         [HttpPost()]
         public async Task<ActionResult<Book>> CreateBook(
