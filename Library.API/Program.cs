@@ -1,6 +1,8 @@
 using Library.API.Contexts;
 using Library.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -59,22 +61,48 @@ builder.Services.AddApiVersioning(opt =>
     //opt.ApiVersionReader = new MediaTypeApiVersionReader(); // default
 });
 
+builder.Services.AddVersionedApiExplorer(opt =>
+{
+    opt.GroupNameFormat = "'v'VV";
+});
+
+var apiVersionDescriptionProvider = builder?.Services?.BuildServiceProvider()?.GetService<IApiVersionDescriptionProvider>();
+
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
     {
-        Title = "Library Api",
-        Version = "v1",
-        Description = "Descripcion del api",
-        Contact = new()
+        opt.SwaggerDoc($"LibraryOpenApiSpecificication{description.GroupName}", new()
         {
-            Email = "jgarcia@gmail",
-            Name = "Josvany"
-        },
-        License = new()
+            Title = "Library Api",
+            Version = description.ApiVersion.ToString(),
+            Description = "Descripcion del api",
+            Contact = new()
+            {
+                Email = "jgarcia@gmail",
+                Name = "Josvany"
+            },
+            License = new()
+            {
+                Name = "License",
+            }
+        });
+    }
+
+    opt.DocInclusionPredicate((documentName, apiDescription) =>
+    {
+        var actionApiVersionModel = apiDescription.ActionDescriptor.GetApiVersionModel(ApiVersionMapping.Explicit | ApiVersionMapping.Implicit);
+        if (actionApiVersionModel == null)
         {
-            Name = "License",
+            return true;
         }
+
+        if (actionApiVersionModel.DeclaredApiVersions.Any())
+        {
+            return actionApiVersionModel.DeclaredApiVersions.Any(v => $"LibraryOpenApiSpecificicationv{v}" == documentName);
+        }
+
+        return actionApiVersionModel.ImplementedApiVersions.Any(v => $"LibraryOpenApiSpecificicationv{v}" == documentName);
     });
 
     //multiple especificaciones
@@ -121,7 +149,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(conf =>
 {
-    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+    foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+    {
+        conf.SwaggerEndpoint($"/swagger/LibraryOpenApiSpecificication{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+    }
+    //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
     //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationAuthors/swagger.json", "Library Api (Authors)");
     //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationBooks/swagger.json", "Library Api (Books)");
 
