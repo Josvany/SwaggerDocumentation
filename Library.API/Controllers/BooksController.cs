@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Library.API.Controllers
 {
-    [Route("api/authors/{authorId}/books")]
+    [Route("api/v{version:apiVersion}/authors/{authorId}/books")]
     [ApiController]
     [Produces("application/json", "application/xml")]
-    [ApiExplorerSettings(GroupName = "LibraryOpenApiSpecificicationBooks")]
+    //[ApiExplorerSettings(GroupName = "LibraryOpenApiSpecificicationBooks")]
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;

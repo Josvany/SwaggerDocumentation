@@ -2,10 +2,12 @@ using Library.API.Contexts;
 using Library.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -48,11 +50,37 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
+    opt.ReportApiVersions = true;
+    //opt.ApiVersionReader = new HeaderApiVersionReader("api-version"); // custom
+    //opt.ApiVersionReader = new MediaTypeApiVersionReader(); // default
+});
+
 builder.Services.AddSwaggerGen(opt =>
 {
-    //opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    {
+        Title = "Library Api",
+        Version = "v1",
+        Description = "Descripcion del api",
+        Contact = new()
+        {
+            Email = "jgarcia@gmail",
+            Name = "Josvany"
+        },
+        License = new()
+        {
+            Name = "License",
+        }
+    });
+
+    //multiple especificaciones
+    //opt.SwaggerDoc("LibraryOpenApiSpecificicationAuthors", new()
     //{
-    //    Title = "Library Api",
+    //    Title = "Library Api (Authors)",
     //    Version = "v1",
     //    Description = "Descripcion del api",
     //    Contact = new()
@@ -66,38 +94,21 @@ builder.Services.AddSwaggerGen(opt =>
     //    }
     //});
 
-    //multiple especificaciones
-    opt.SwaggerDoc("LibraryOpenApiSpecificicationAuthors", new()
-    {
-        Title = "Library Api (Authors)",
-        Version = "v1",
-        Description = "Descripcion del api",
-        Contact = new()
-        {
-            Email = "jgarcia@gmail",
-            Name = "Josvany"
-        },
-        License = new()
-        {
-            Name = "License",
-        }
-    });
-
-    opt.SwaggerDoc("LibraryOpenApiSpecificicationBooks", new()
-    {
-        Title = "Library Api Books",
-        Version = "v1",
-        Description = "Descripcion del api",
-        Contact = new()
-        {
-            Email = "jgarcia@gmail",
-            Name = "Josvany"
-        },
-        License = new()
-        {
-            Name = "License",
-        }
-    });
+    //opt.SwaggerDoc("LibraryOpenApiSpecificicationBooks", new()
+    //{
+    //    Title = "Library Api Books",
+    //    Version = "v1",
+    //    Description = "Descripcion del api",
+    //    Contact = new()
+    //    {
+    //        Email = "jgarcia@gmail",
+    //        Name = "Josvany"
+    //    },
+    //    License = new()
+    //    {
+    //        Name = "License",
+    //    }
+    //});
 
     var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlCommentFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, xmlCommentFile);
@@ -110,9 +121,9 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(conf =>
 {
-    //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
-    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationAuthors/swagger.json", "Library Api (Authors)");
-    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationBooks/swagger.json", "Library Api (Books)");
+    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+    //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationAuthors/swagger.json", "Library Api (Authors)");
+    //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationBooks/swagger.json", "Library Api (Books)");
 
     conf.RoutePrefix = string.Empty;
 });

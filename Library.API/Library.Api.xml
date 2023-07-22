@@ -30,6 +30,12 @@
              ] \
             </remarks>
         </member>
+        <member name="M:Library.API.Controllers.AuthorsControllerV2.GetAuthors">
+            <summary>
+            Get a list of authors, V2
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Library.API.Controllers.BooksController.GetBook(System.Guid,System.Guid)">
             <summary>
             obtener libro especifico por autor especifico
