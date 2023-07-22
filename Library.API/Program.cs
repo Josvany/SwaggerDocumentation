@@ -46,7 +46,17 @@ builder.Services.AddSwaggerGen(opt =>
     opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
     {
         Title = "Library Api",
-        Version = "v1"
+        Version = "v1",
+        Description = "Descripcion del api",
+        Contact = new()
+        {
+            Email = "jgarcia@gmail",
+            Name = "Josvany"
+        },
+        License = new()
+        {
+            Name = "License",
+        }
     });
 
     var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
