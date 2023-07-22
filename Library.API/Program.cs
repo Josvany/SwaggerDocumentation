@@ -19,7 +19,7 @@ builder.Services.AddControllers(configure =>
 });
 
 // configure the NewtonsoftJsonOutputFormatter
-builder.Services.Configure<MvcOptions>(configureOptions => 
+builder.Services.Configure<MvcOptions>(configureOptions =>
 {
     var jsonOutputFormatter = configureOptions.OutputFormatters
         .OfType<NewtonsoftJsonOutputFormatter>().FirstOrDefault();
@@ -33,7 +33,7 @@ builder.Services.Configure<MvcOptions>(configureOptions =>
             jsonOutputFormatter.SupportedMediaTypes.Remove("text/json");
         }
     }
-}); 
+});
 
 builder.Services.AddDbContext<LibraryContext>(
     dbContextOptions => dbContextOptions.UseSqlite(

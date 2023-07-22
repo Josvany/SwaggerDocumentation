@@ -11,6 +11,25 @@
             <param name="authorId">Id del autor</param>
             <returns>retorna id, firsname, lastname </returns>
         </member>
+        <member name="M:Library.API.Controllers.AuthorsController.UpdateAuthor(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Library.API.Models.AuthorForUpdate})">
+            <summary>
+            actualizacion parcial del autor
+            </summary>
+            <param name="authorId">id del autor a actualizar</param>
+            <param name="patchDocument">el conjunto de operaciones a aplicar al actor</param>
+            <returns>un resultado de acción de tipo autor</returns>
+            <remarks>
+            /// ejemplo de una solicitud (soliciturd para actualizar el primer nombre del author)
+            Patch /author/id \
+            [ \
+                { \
+                  "op" : "replace", \
+                  "path" : "/firstname", \
+                  "value" : "nuevo nombre " \
+                } \
+             ] \
+            </remarks>
+        </member>
         <member name="T:Library.API.Models.Author">
             <summary>
             author

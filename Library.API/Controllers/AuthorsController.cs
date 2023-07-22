@@ -68,11 +68,25 @@ namespace Library.API.Controllers
             // return the author
             return Ok(_mapper.Map<Author>(authorFromRepo));
         }
-
+        /// <summary>
+        /// actualizacion parcial del autor
+        /// </summary>
+        /// <param name="authorId">id del autor a actualizar</param>
+        /// <param name="patchDocument">el conjunto de operaciones a aplicar al actor</param>
+        /// <returns>un resultado de acción de tipo autor</returns>
+        /// <remarks>
+        /// /// ejemplo de una solicitud (soliciturd para actualizar el primer nombre del author)
+        /// Patch /author/id \
+        /// [ \
+        ///     { \
+        ///       "op" : "replace", \
+        ///       "path" : "/firstname", \
+        ///       "value" : "nuevo nombre " \
+        ///     } \
+        ///  ] \
+        /// </remarks>
         [HttpPatch("{authorId}")]
-        public async Task<ActionResult<Author>> UpdateAuthor(
-            Guid authorId,
-            JsonPatchDocument<AuthorForUpdate> patchDocument)
+        public async Task<ActionResult<Author>> UpdateAuthor(Guid authorId, JsonPatchDocument<AuthorForUpdate> patchDocument)
         {
             var authorFromRepo = await _authorsRepository.GetAuthorAsync(authorId);
             if (authorFromRepo == null)
