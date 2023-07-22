@@ -8,6 +8,7 @@ namespace Library.API.Controllers
 {
     [Route("api/authors/{authorId}/books")]
     [ApiController]
+    [Produces("application/json", "application/xml")]
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;

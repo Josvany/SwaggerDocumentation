@@ -14,17 +14,14 @@ namespace Library.API.Controllers
         private readonly IAuthorRepository _authorsRepository;
         private readonly IMapper _mapper;
 
-        public AuthorsController(
-            IAuthorRepository authorsRepository,
-            IMapper mapper)
+        public AuthorsController(IAuthorRepository authorsRepository, IMapper mapper)
         {
-            _authorsRepository = authorsRepository
-                ?? throw new ArgumentNullException(nameof(authorsRepository));
-            _mapper = mapper
-                ?? throw new ArgumentNullException(nameof(mapper));
+            _authorsRepository = authorsRepository ?? throw new ArgumentNullException(nameof(authorsRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(Author), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
             var authorsFromRepo = await _authorsRepository.GetAuthorsAsync();

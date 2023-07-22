@@ -20,7 +20,7 @@ builder.Services.AddControllers(configure =>
     ).AddNewtonsoftJson(setupAction =>
     {
         setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-    });
+    }).AddXmlDataContractSerializerFormatters();
 
 // configure the NewtonsoftJsonOutputFormatter
 builder.Services.Configure<MvcOptions>(configureOptions =>
