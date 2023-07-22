@@ -13,17 +13,11 @@ namespace Library.API.Controllers
         private readonly IAuthorRepository _authorRepository;
         private readonly IMapper _mapper;
 
-        public BooksController(
-            IBookRepository bookRepository,
-            IAuthorRepository authorRepository,
-            IMapper mapper)
+        public BooksController(IBookRepository bookRepository, IAuthorRepository authorRepository, IMapper mapper)
         {
-            _bookRepository = bookRepository
-                ?? throw new ArgumentNullException(nameof(bookRepository));
-            _authorRepository = authorRepository
-                ?? throw new ArgumentNullException(nameof(authorRepository));
-            _mapper = mapper
-                ?? throw new ArgumentNullException(nameof(mapper));
+            _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
+            _authorRepository = authorRepository ?? throw new ArgumentNullException(nameof(authorRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet()]
@@ -38,11 +32,18 @@ namespace Library.API.Controllers
             var booksFromRepo = await _bookRepository.GetBooksAsync(authorId);
             return Ok(_mapper.Map<IEnumerable<Book>>(booksFromRepo));
         }
-
+        /// <summary>
+        /// obtener libro especifico por autor especifico
+        /// </summary>
+        /// <param name="authorId">id autor</param>
+        /// <param name="bookId">id libro</param>
+        /// <returns>datos del libro</returns>
+        /// <response code="200">Retorna informacion de la solicitud encontrada</response>
         [HttpGet("{bookId}")]
-        public async Task<ActionResult<Book>> GetBook(
-            Guid authorId,
-            Guid bookId)
+        [ProducesResponseType(typeof(Book), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Book), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Book), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Book>> GetBook(Guid authorId, Guid bookId)
         {
             if (!await _authorRepository.AuthorExistsAsync(authorId))
             {
