@@ -17,7 +17,7 @@ namespace Library.API.Attributes
                ?? throw new ArgumentNullException(nameof(requestHeaderToMatch));
 
             // check if the inputted media types are valid media types
-            // and add them to the _mediaTypes collection                     
+            // and add them to the _mediaTypes collection
 
             if (MediaTypeHeaderValue.TryParse(mediaType,
                 out MediaTypeHeaderValue? parsedMediaType))

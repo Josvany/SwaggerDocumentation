@@ -68,6 +68,7 @@ namespace Library.API.Controllers
             // return the author
             return Ok(_mapper.Map<Author>(authorFromRepo));
         }
+
         /// <summary>
         /// actualizacion parcial del autor
         /// </summary>
@@ -98,7 +99,7 @@ namespace Library.API.Controllers
             var author = _mapper.Map<AuthorForUpdate>(authorFromRepo);
             patchDocument.ApplyTo(author, ModelState);
 
-            // if there are errors when applying the patch the patch doc 
+            // if there are errors when applying the patch the patch doc
             // was badly formed  These aren't caught via the ApiController
             // validation, so we must manually check the modelstate and
             // potentially return these errors.

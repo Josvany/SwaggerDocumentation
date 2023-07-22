@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Library.API
+﻿namespace Library.API
 {
     public static class IListExtensions
     {
