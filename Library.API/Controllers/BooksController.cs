@@ -68,9 +68,8 @@ namespace Library.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<Book>> CreateBook(
-            Guid authorId,
-            BookForCreation bookForCreation)
+        [Consumes("application/json", "application/xml")]
+        public async Task<ActionResult<Book>> CreateBook(Guid authorId, BookForCreation bookForCreation)
         {
             if (!await _authorRepository.AuthorExistsAsync(authorId))
             {
