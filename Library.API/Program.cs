@@ -50,9 +50,42 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    //opt.SwaggerDoc("LibraryOpenApiSpecificication", new()
+    //{
+    //    Title = "Library Api",
+    //    Version = "v1",
+    //    Description = "Descripcion del api",
+    //    Contact = new()
+    //    {
+    //        Email = "jgarcia@gmail",
+    //        Name = "Josvany"
+    //    },
+    //    License = new()
+    //    {
+    //        Name = "License",
+    //    }
+    //});
+
+    //multiple especificaciones
+    opt.SwaggerDoc("LibraryOpenApiSpecificicationAuthors", new()
     {
-        Title = "Library Api",
+        Title = "Library Api (Authors)",
+        Version = "v1",
+        Description = "Descripcion del api",
+        Contact = new()
+        {
+            Email = "jgarcia@gmail",
+            Name = "Josvany"
+        },
+        License = new()
+        {
+            Name = "License",
+        }
+    });
+
+    opt.SwaggerDoc("LibraryOpenApiSpecificicationBooks", new()
+    {
+        Title = "Library Api Books",
         Version = "v1",
         Description = "Descripcion del api",
         Contact = new()
@@ -77,7 +110,10 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(conf =>
 {
-    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+    //conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificication/swagger.json", "Library Api");
+    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationAuthors/swagger.json", "Library Api (Authors)");
+    conf.SwaggerEndpoint("/swagger/LibraryOpenApiSpecificicationBooks/swagger.json", "Library Api (Books)");
+
     conf.RoutePrefix = string.Empty;
 });
 
