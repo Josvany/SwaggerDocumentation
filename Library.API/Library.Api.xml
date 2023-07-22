@@ -37,7 +37,7 @@
             <param name="authorId">id autor</param>
             <param name="bookId">id libro</param>
             <returns>datos del libro</returns>
-            <response code="200">retorna</response>
+            <response code="200">Retorna informacion de la solicitud encontrada</response>
         </member>
         <member name="T:Library.API.Models.Author">
             <summary>

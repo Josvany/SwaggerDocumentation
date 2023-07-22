@@ -12,10 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(configure =>
     {
         configure.ReturnHttpNotAcceptable = true;
-
-        configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
-        configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
-        configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+        // si hay confirado un filtro los ApiConventionMethod no se visualizan
+        //configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+        //configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+        //configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
     }
     ).AddNewtonsoftJson(setupAction =>
     {
